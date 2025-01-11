@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@gouvernathor/rng": "^1.0.0"
+  }
+}
