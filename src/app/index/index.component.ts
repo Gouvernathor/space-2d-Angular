@@ -28,7 +28,8 @@ export class IndexComponent {
 
   private reflow(w: Window): void {
     reflow(this.canvas().nativeElement, {
-      wInnerHeight: w.innerHeight, wInnerWidth: w.innerWidth
+      wInnerHeight: w.innerHeight, wInnerWidth: w.innerWidth,
+      guiWidth: this.guiWidth, marginWidth: this.marginWidth, marginHeight: this.marginHeight,
     });
   }
 

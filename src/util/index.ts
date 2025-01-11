@@ -1,9 +1,12 @@
 export function reflow(
     canvas: HTMLCanvasElement,
     {
-        guiWidth = 300, marginWidth = 16, marginHeight = 16,
-        wInnerWidth = window.innerWidth, wInnerHeight = window.innerHeight,
-    } = {},
+        guiWidth, marginWidth, marginHeight,
+        wInnerWidth, wInnerHeight,
+    }: {
+        guiWidth: number, marginWidth: number, marginHeight: number,
+        wInnerWidth: number, wInnerHeight: number,
+    },
 ): void {
     const width = canvas.width;
     const height = canvas.height;
