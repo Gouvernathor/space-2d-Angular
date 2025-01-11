@@ -1,4 +1,4 @@
-import { Component, ElementRef, viewChild } from '@angular/core';
+import { Component, computed, ElementRef, viewChild } from '@angular/core';
 import { GuiComponent } from "./gui/gui.component";
 import { reflow } from '../../util/index';
 import { generateRandomSeed } from '../../util/random';
@@ -19,7 +19,8 @@ export class IndexComponent {
   marginWidth = 16;
   marginHeight = 16;
 
-  canvas = viewChild.required<ElementRef<HTMLCanvasElement>>('canvas');
+  canvasRef = viewChild.required<ElementRef<HTMLCanvasElement>>('canvas');
+  canvas = computed(() => this.canvasRef().nativeElement);
   scene = viewChild.required(SceneDirective);
 
   props = {
@@ -38,7 +39,7 @@ export class IndexComponent {
   }
 
   private resize(width?: number, height?: number): void {
-    const canvas = this.canvas().nativeElement;
+    const canvas = this.canvas();
     if (width !== undefined) {
       canvas.width = width;
     }
@@ -50,7 +51,7 @@ export class IndexComponent {
   }
 
   private reflow(w: Window): void {
-    reflow(this.canvas().nativeElement, {
+    reflow(this.canvas(), {
       wInnerHeight: w.innerHeight, wInnerWidth: w.innerWidth,
       guiWidth: this.guiWidth, marginWidth: this.marginWidth, marginHeight: this.marginHeight,
     });
@@ -66,13 +67,13 @@ export class IndexComponent {
   }
 
   onFinishChangeWidth(width: number): void {
-    if (width !== this.canvas().nativeElement.width) {
+    if (width !== this.canvas().width) {
       this.resize(Math.round(width), undefined);
     }
   }
 
   onFinishChangeHeight(height: number): void {
-    if (height !== this.canvas().nativeElement.height) {
+    if (height !== this.canvas().height) {
       this.resize(undefined, Math.round(height));
     }
   }
