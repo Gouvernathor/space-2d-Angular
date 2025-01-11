@@ -1,8 +1,8 @@
-<canvas #canvas id="render-canvas" class="render-canvas" [width]="window.innerWidth-(guiWidth+3*marginWidth)" [height]="window.innerHeight-(2*marginHeight)"></canvas>
+<canvas #canvas appScene id="render-canvas" class="render-canvas" [width]="window.innerWidth-(guiWidth+3*marginWidth)" [height]="window.innerHeight-(2*marginHeight)"></canvas>
 
 <app-gui
     [seed]="props.seed"
-    [maxTextureSize]="scene.maxTextureSize"
+    [maxTextureSize]="scene()!.maxTextureSize"
     [width]="canvas.width" [height]="canvas.height"
     [renderPointStars]="props.renderPointStars" [renderStars]="props.renderStars" [renderSun]="props.renderSun" [renderNebulae]="props.renderNebulae" [shortScale]="props.shortScale"
 

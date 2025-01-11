@@ -2,10 +2,11 @@ import { Component, ElementRef, viewChild } from '@angular/core';
 import { GuiComponent } from "./gui/gui.component";
 import { reflow } from '../../util/index';
 import { generateRandomSeed } from '../../util/random';
+import { SceneDirective } from './scene.directive';
 
 @Component({
   selector: 'app-index',
-  imports: [GuiComponent],
+  imports: [GuiComponent, SceneDirective],
   templateUrl: './index.component.html',
   styleUrl: './index.component.scss',
   host: {
@@ -13,13 +14,13 @@ import { generateRandomSeed } from '../../util/random';
   },
 })
 export class IndexComponent {
-  canvas = viewChild.required<ElementRef<HTMLCanvasElement>>('canvas');
   window = window;
   guiWidth = 300;
   marginWidth = 16;
   marginHeight = 16;
 
-  scene: any;
+  canvas = viewChild.required<ElementRef<HTMLCanvasElement>>('canvas');
+  scene = viewChild(SceneDirective);
 
   props = {
     renderPointStars: true,
@@ -32,7 +33,7 @@ export class IndexComponent {
 
   ngOnInit(): void {
     this.reflow(window);
-    // scene.render(this.props);
+    this.scene()!.render(this.props);
     // and then render the gui element
   }
 
@@ -45,7 +46,7 @@ export class IndexComponent {
       canvas.height = height;
     }
     this.reflow(window);
-    // scene.render(this.props);
+    this.scene()!.render(this.props);
   }
 
   private reflow(w: Window): void {
@@ -61,7 +62,7 @@ export class IndexComponent {
 
   onFinishChangeSeed(seed: string|number|undefined): void {
     this.props.seed = seed;
-    // scene.render(this.props);
+    this.scene()!.render(this.props);
   }
 
   onFinishChangeWidth(width: number): void {
@@ -78,26 +79,26 @@ export class IndexComponent {
 
   onChangeRenderPointStars(renderPointStars: boolean): void {
     this.props.renderPointStars = renderPointStars;
-    // scene.render(this.props);
+    this.scene()!.render(this.props);
   }
 
   onChangeRenderStars(renderStars: boolean): void {
     this.props.renderStars = renderStars;
-    // scene.render(this.props);
+    this.scene()!.render(this.props);
   }
 
   onChangeRenderSun(renderSun: boolean): void {
     this.props.renderSun = renderSun;
-    // scene.render(this.props);
+    this.scene()!.render(this.props);
   }
 
   onChangeRenderNebulae(renderNebulae: boolean): void {
     this.props.renderNebulae = renderNebulae;
-    // scene.render(this.props);
+    this.scene()!.render(this.props);
   }
 
   onChangeShortScale(shortScale: boolean): void {
     this.props.shortScale = shortScale;
-    // scene.render(this.props);
+    this.scene()!.render(this.props);
   }
 }
