@@ -1,6 +1,6 @@
-<canvas id="render-canvas" class="render-canvas"></canvas>
+<canvas #canvas id="render-canvas" class="render-canvas" [width]="window.innerWidth-(guiWidth+3*marginWidth)" [height]="window.innerHeight-(2*marginHeight)"></canvas>
 
-<div id="gui"></div>
+<app-gui/>
 
 <!--
 <a href='http://wwwtyro.net/2016/10/22/2D-space-scene-procgen.html'>
