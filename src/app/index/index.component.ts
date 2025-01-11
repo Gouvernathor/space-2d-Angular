@@ -29,7 +29,7 @@ export class IndexComponent {
     renderSun: true,
     renderNebulae: true,
     shortScale: true,
-    seed: generateRandomSeed() as string|number|undefined,
+    seed: generateRandomSeed() as string,
   };
 
   ngOnInit(): void {
@@ -61,7 +61,7 @@ export class IndexComponent {
     this.reflow(event.target as Window);
   }
 
-  onFinishChangeSeed(seed: string|number|undefined): void {
+  onFinishChangeSeed(seed: string): void {
     this.props.seed = seed;
     this.scene().render(this.props);
   }

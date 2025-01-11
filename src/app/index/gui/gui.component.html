@@ -1,1 +1,8 @@
-<p>gui works!</p>
+<div class="dg-gui">
+    @if (true) {
+        <div class="seedDiv"> <!-- seed input -->
+            <label class="seedLabel">Seed</label>
+            <input class="seedInput" type="text" [value]="seed()" (change)="onSeedChange($event)"/>
+        </div>
+    }
+</div>

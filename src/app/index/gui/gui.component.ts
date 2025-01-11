@@ -7,22 +7,26 @@ import { Component, input, output } from '@angular/core';
   styleUrl: './gui.component.scss'
 })
 export class GuiComponent {
-  seed = input<number|string|undefined>(undefined);
-  maxTextureSize = input.required<unknown>();
-  width = input.required<number>();
-  height = input.required<number>();
-  renderPointStars = input.required<boolean>();
-  renderStars = input.required<boolean>();
-  renderSun = input.required<boolean>();
-  renderNebulae = input.required<boolean>();
-  shortScale = input.required<boolean>();
+  readonly seed = input.required<string>();
+  readonly maxTextureSize = input.required<unknown>();
+  readonly width = input.required<number>();
+  readonly height = input.required<number>();
+  readonly renderPointStars = input.required<boolean>();
+  readonly renderStars = input.required<boolean>();
+  readonly renderSun = input.required<boolean>();
+  readonly renderNebulae = input.required<boolean>();
+  readonly shortScale = input.required<boolean>();
 
-  finishChangeSeed = output<number|string|undefined>();
-  finishChangeWidth = output<number>();
-  finishChangeHeight = output<number>();
-  changeRenderPointStars = output<boolean>();
-  changeRenderStars = output<boolean>();
-  changeRenderSun = output<boolean>();
-  changeRenderNebulae = output<boolean>();
-  changeShortScale = output<boolean>();
+  readonly finishChangeSeed = output<string>();
+  readonly finishChangeWidth = output<number>();
+  readonly finishChangeHeight = output<number>();
+  readonly changeRenderPointStars = output<boolean>();
+  readonly changeRenderStars = output<boolean>();
+  readonly changeRenderSun = output<boolean>();
+  readonly changeRenderNebulae = output<boolean>();
+  readonly changeShortScale = output<boolean>();
+
+  onSeedChange(event: Event): void {
+    this.finishChangeSeed.emit((event.target as HTMLInputElement).value);
+  }
 }

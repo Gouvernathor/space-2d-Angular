@@ -1,0 +1,36 @@
+.dg-gui {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    --highlight: #0d8;
+}
+
+.seedDiv {
+    border-bottom: 1px solid rgb(51, 51, 51);
+    background-color: rgb(26, 26, 26);
+    min-height: 25px;
+    padding: 3px;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: wrap;
+    align-items: center;
+}
+
+.seedLabel {
+    width: 96px;
+    font: 11px Arial;
+    padding: 3px;
+    color: rgb(255, 255, 255);
+    cursor: default;
+    user-select: none;
+}
+
+.seedInput {
+    color: var(--highlight);
+    font: 11px Arial;
+    background-color: rgb(68, 68, 68);
+    padding: 3px;
+    width: 192px;
+    border: medium;
+    outline: none;
+}
