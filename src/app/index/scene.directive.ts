@@ -68,7 +68,7 @@ export class SceneDirective {
     // generating 3 seeds to use for the 3 different layers of the scene
 
     if (props.renderPointStars) {
-      let data = pointStars.generateTexture(width, height, 0.05, 0.125, rand);
+      const data = pointStars.generateTexture(width, height, 0.05, 0.125, rand);
       this.pointStarTexture({
         format: 'rgb',
         width,
@@ -85,9 +85,8 @@ export class SceneDirective {
     }
 
     rand.seed = seed1;
-    let nebulaCount = 0;
-    if (props.renderNebulae) nebulaCount = rand.randRange(1, 5);
-    let nebulaOut = this.pingPong(ping, ping, pong, nebulaCount, (source, destination) => {
+    const nebulaCount = props.renderNebulae ? rand.randRange(1, 5) : 0;
+    const nebulaOut = this.pingPong(ping, ping, pong, nebulaCount, (source, destination) => {
       this.nebulaRenderer({
         source,
         destination,
@@ -103,9 +102,8 @@ export class SceneDirective {
     });
 
     rand.seed = seed2;
-    let starCount = 0;
-    if (props.renderStars) starCount = rand.randRange(1, 9);
-    let starOut = this.pingPong(nebulaOut, ping, pong, starCount, (source, destination) => {
+    const starCount = props.renderStars ? rand.randRange(1, 9) : 0;
+    const starOut = this.pingPong(nebulaOut, ping, pong, starCount, (source, destination) => {
       this.starRenderer({
         center: [rand.random(), rand.random()],
         coreRadius: rand.random() * 0.0,
