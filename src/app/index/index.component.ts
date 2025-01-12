@@ -95,7 +95,15 @@ export class IndexComponent {
     }
   }
 
-  downloadCanvas(): void {
+  async canvasToBlob(canvas: HTMLCanvasElement, type?: string, quality = 1.) {
+    const blob = await new Promise<Blob|null>(resolve => canvas.toBlob(resolve, type, quality));
+    if (blob === null) {
+      throw new Error(`Failed to extract data as ${type} from canvas`);
+    }
+    return blob;
+  }
+
+  async downloadCanvas() {
     let blobURL: string;
 
     function downloadFromURL() {
@@ -131,13 +139,9 @@ export class IndexComponent {
         continue;
       }
 
-      const blob = await new Promise<Blob|null>(resolve => this.canvas().toBlob(resolve, mime, 1.0));
-      if (blob === null) {
-        console.error("Failed to extract data from canvas");
-        return;
-      }
-
       try {
+        const blob = await this.canvasToBlob(this.canvas(), mime, 1.0);
+
         await navigator.clipboard.write([
           new ClipboardItem({
             [blob.type]: blob,
