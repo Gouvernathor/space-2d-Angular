@@ -26,11 +26,8 @@ export class SceneDirective {
   constructor(
     private canvasRef: ElementRef<HTMLCanvasElement>,
   ) {
-    // This runs before any ng* lifecycle hooks on the index component
-    // and the index component's constructor runs before the canvas element exists
-    // so this the only occasion to set preserveDrawingBuffer to true
-    // (regl creates a context without setting this flag, and you can't change it after the first context)
-    const regl = this.regl = REGL({canvas: this.canvas(), attributes: {preserveDrawingBuffer: true}});
+    // regl creates a context without setting the preserveDrawingBuffer flag, so blobs must be created immediately after rendering
+    const regl = this.regl = REGL({canvas: this.canvas()});
     this.pointStarTexture = regl.texture();
     this.ping = regl.framebuffer({color: regl.texture(), depth: false, stencil: false, depthStencil: false});
     this.pong = regl.framebuffer({color: regl.texture(), depth: false, stencil: false, depthStencil: false});

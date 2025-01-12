@@ -3,6 +3,8 @@ import { GuiComponent, Props } from "./gui/gui.component";
 import { generateRandomSeed } from '../../util/random';
 import { SceneDirective } from './scene.directive';
 
+const blobMimes = ['image/webp', 'image/png'];
+
 @Component({
   selector: 'app-index',
   imports: [GuiComponent, SceneDirective],
@@ -31,6 +33,8 @@ export class IndexComponent {
     seed: generateRandomSeed() as string,
   };
 
+  blobMap: Map<string, Blob> = new Map();
+
   ngOnInit(): void {
     this.canvas().width = window.innerWidth-(this.guiWidth+3*this.marginWidth);
     this.canvas().height = window.innerHeight-(2*this.marginHeight);
@@ -43,6 +47,18 @@ export class IndexComponent {
 
   private renderScene() {
     this.scene().render(this.props);
+
+    this.blobMap.clear();
+    for (const mime of blobMimes) {
+      this.canvas().toBlob(blob => {
+        if (blob === null) {
+          console.warn(`Failed to extract data as ${mime} from canvas`);
+        } else {
+          // console.log(`${mime} canvas size: ${blob.size}`);
+          this.blobMap.set(mime, blob);
+        }
+      }, mime, 1.);
+    }
   }
 
   private resize(width?: number, height?: number): void {
@@ -100,18 +116,14 @@ export class IndexComponent {
     }
   }
 
-  private async canvasToBlob(canvas: HTMLCanvasElement, type?: string, quality = 1.) {
-    const blob = await new Promise<Blob|null>(resolve => canvas.toBlob(resolve, type, quality));
-    if (blob === null) {
-      throw new Error(`Failed to extract data as ${type} from canvas`);
-    }
-    return blob;
-  }
-
   private blobURL?: string;
 
   async downloadCanvas() {
-    const blob = await this.canvasToBlob(this.canvas(), 'image/webp', 1.0);
+    if (this.blobMap.size === 0) {
+      console.warn('No blobs available to download');
+      return;
+    }
+    const blob = this.blobMap[Symbol.iterator]().next().value![1];
 
     if (this.blobURL !== undefined) {
       URL.revokeObjectURL(this.blobURL);
@@ -127,15 +139,19 @@ export class IndexComponent {
   canCopyCanvas = navigator?.clipboard?.write !== undefined;
 
   async copyCanvas() {
-    for (const mime of ['image/webp', 'image/png']) {
+    for (const mime of blobMimes) {
       if (ClipboardItem.supports && !ClipboardItem.supports(mime)) {
         console.log(`Clipboard does not support ${mime}`);
         continue;
       }
 
-      try {
-        const blob = await this.canvasToBlob(this.canvas(), mime, 1.0);
+      if (!this.blobMap.has(mime)) {
+        // console.warn(`No ${mime} blob available to copy`);
+        continue;
+      }
 
+      try {
+        const blob = this.blobMap.get(mime)!;
         await navigator.clipboard.write([
           new ClipboardItem({
             [blob.type]: blob,
@@ -146,7 +162,9 @@ export class IndexComponent {
         continue;
       }
       console.log(`Copied canvas as ${mime} to clipboard`);
-      break;
+      return;
     }
+
+    console.error('No blobs available to copy');
   }
 }
