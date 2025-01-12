@@ -106,20 +106,17 @@ export class IndexComponent {
   private blobURL?: string;
 
   async downloadCanvas() {
-    function downloadFromURL(url: string) {
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'stars.png';
-      a.click();
-    }
-
     const blob = await this.canvasToBlob(this.canvas(), 'image/webp', 1.0);
 
     if (this.blobURL !== undefined) {
       URL.revokeObjectURL(this.blobURL);
     }
+    this.blobURL = URL.createObjectURL(blob);
 
-    downloadFromURL(this.blobURL = URL.createObjectURL(blob));
+    const a = document.createElement('a');
+    a.href = this.blobURL;
+    a.download = 'stars.png';
+    a.click();
   }
 
   canCopyCanvas = navigator?.clipboard?.write !== undefined;
