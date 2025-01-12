@@ -26,7 +26,13 @@ export class SceneDirective {
   constructor(
     private canvasRef: ElementRef<HTMLCanvasElement>,
   ) {
+    // This runs before any ng* lifecycle hooks on the index component
+    // and the index component's constructor runs before the canvas element exists
+    // so this the only occasion to set preserveDrawingBuffer to true
+    // (regl creates a context without setting this flag, and you can't change it after the first context)
+    this.canvas().getContext("experimental-webgl", {preserveDrawingBuffer: true});
     const regl = this.regl = REGL({canvas: this.canvas()});
+    // const regl = this.regl = REGL(this.canvas().getContext("experimental-webgl", {preserveDrawingBuffer: true}) as any);
     this.pointStarTexture = regl.texture();
     this.ping = regl.framebuffer({color: regl.texture(), depth: false, stencil: false, depthStencil: false});
     this.pong = regl.framebuffer({color: regl.texture(), depth: false, stencil: false, depthStencil: false});

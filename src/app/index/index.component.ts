@@ -96,6 +96,30 @@ export class IndexComponent {
   }
 
   downloadCanvas(): void {
+    let blobURL: string;
+
+    function downloadFromURL() {
+      const a = document.createElement('a');
+      a.href = blobURL;
+      a.download = 'stars.png';
+      a.click();
+    }
+
+    this.canvas().toBlob((blob) => {
+        if (blob === null) {
+          console.error("Failed to download canvas");
+          return;
+        }
+
+        if (blobURL !== undefined) {
+          URL.revokeObjectURL(blobURL);
+        }
+        blobURL = URL.createObjectURL(blob);
+        downloadFromURL();
+      },
+      'image/webp',
+      1.0,
+    );
   }
 
   copyCanvas(): void {
