@@ -124,20 +124,31 @@ export class IndexComponent {
 
   canCopyCanvas = navigator?.clipboard?.write !== undefined;
 
-  copyCanvas(): void {
-    this.canvas().toBlob((blob) => {
+  async copyCanvas() {
+    for (const mime of ['image/webp', 'image/png']) {
+      if (ClipboardItem.supports && !ClipboardItem.supports(mime)) {
+        console.log(`Clipboard does not support ${mime}`);
+        continue;
+      }
+
+      const blob = await new Promise<Blob|null>(resolve => this.canvas().toBlob(resolve, mime, 1.0));
       if (blob === null) {
         console.error("Failed to extract data from canvas");
         return;
       }
 
-      navigator.clipboard.write([
-        new ClipboardItem({
-          [blob.type]: blob,
-        }),
-      ]).then(() => {
-        console.log("Copied to clipboard");
-      });
-    });
+      try {
+        await navigator.clipboard.write([
+          new ClipboardItem({
+            [blob.type]: blob,
+          }),
+        ]);
+      } catch (e) {
+        console.warn(`Failed to copy canvas as ${mime}: ${e}`);
+        continue;
+      }
+      console.log(`Copied canvas as ${mime} to clipboard`);
+      break;
+    }
   }
 }
