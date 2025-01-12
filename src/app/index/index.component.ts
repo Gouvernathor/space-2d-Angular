@@ -32,10 +32,9 @@ export class IndexComponent {
     seed: generateRandomSeed() as string,
   };
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.reflow(window);
     this.scene().render(this.props);
-    // and then render the gui element
   }
 
   private resize(width?: number, height?: number): void {
