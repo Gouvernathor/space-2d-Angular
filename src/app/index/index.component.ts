@@ -26,7 +26,7 @@ export class IndexComponent {
   props = {
     renderPointStars: true,
     renderStars: true,
-    renderSun: true,
+    renderSun: false,
     renderNebulae: true,
     shortScale: true,
     seed: generateRandomSeed() as string,
