@@ -19,8 +19,8 @@ export class SceneDirective {
   private copyRenderer: REGL.DrawCommand;
   private lastWidth?: number;
   private lastHeight?: number;
-  public readonly maxTextureSize: number;
 
+  public readonly maxTextureSize = computed(() => this.regl.limits.maxTextureSize);
   private canvas = computed(() => this.canvasRef.nativeElement);
 
   constructor(
@@ -37,7 +37,6 @@ export class SceneDirective {
     this.starRenderer = star.createRenderer(regl);
     this.nebulaRenderer = nebula.createRenderer(regl);
     this.copyRenderer = copy.createRenderer(regl);
-    this.maxTextureSize = regl.limits.maxTextureSize;
   }
 
   render(props: any): void {
