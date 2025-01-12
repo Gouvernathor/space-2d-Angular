@@ -12,7 +12,7 @@
 
 <div class="exports">
     <button (click)="downloadCanvas()">Download the image</button>
-    <button (click)="copyCanvas()">Copy the image to clipboard</button>
+    <button (click)="copyCanvas()" [disabled]="!canCopyCanvas">Copy the image to clipboard</button>
 </div>
 
 <!--

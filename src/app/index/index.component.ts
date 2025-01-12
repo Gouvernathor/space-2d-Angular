@@ -107,7 +107,7 @@ export class IndexComponent {
 
     this.canvas().toBlob((blob) => {
         if (blob === null) {
-          console.error("Failed to download canvas");
+          console.error("Failed to extract data from canvas");
           return;
         }
 
@@ -122,7 +122,22 @@ export class IndexComponent {
     );
   }
 
+  canCopyCanvas = navigator?.clipboard?.write !== undefined;
+
   copyCanvas(): void {
-    // TODO
+    this.canvas().toBlob((blob) => {
+      if (blob === null) {
+        console.error("Failed to extract data from canvas");
+        return;
+      }
+
+      navigator.clipboard.write([
+        new ClipboardItem({
+          [blob.type]: blob,
+        }),
+      ]).then(() => {
+        console.log("Copied to clipboard");
+      });
+    });
   }
 }
