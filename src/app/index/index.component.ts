@@ -34,10 +34,10 @@ export class IndexComponent {
 
   ngAfterViewInit(): void {
     this.reflow(window);
-    this.sceneRender();
+    this.renderScene();
   }
 
-  private sceneRender() {
+  private renderScene() {
     this.scene().render(this.props);
   }
 
@@ -50,7 +50,7 @@ export class IndexComponent {
       canvas.height = height;
     }
     this.reflow(window);
-    this.sceneRender();
+    this.renderScene();
   }
 
   private reflow(w: Window): void {
@@ -81,7 +81,7 @@ export class IndexComponent {
 
   onChangeSeed(seed: string): void {
     this.props.seed = seed;
-    this.sceneRender();
+    this.renderScene();
   }
 
   onChangeWidth(width: number): void {
@@ -98,26 +98,26 @@ export class IndexComponent {
 
   onChangeRenderPointStars(renderPointStars: boolean): void {
     this.props.renderPointStars = renderPointStars;
-    this.sceneRender();
+    this.renderScene();
   }
 
   onChangeRenderStars(renderStars: boolean): void {
     this.props.renderStars = renderStars;
-    this.sceneRender();
+    this.renderScene();
   }
 
   onChangeRenderSun(renderSun: boolean): void {
     this.props.renderSun = renderSun;
-    this.sceneRender();
+    this.renderScene();
   }
 
   onChangeRenderNebulae(renderNebulae: boolean): void {
     this.props.renderNebulae = renderNebulae;
-    this.sceneRender();
+    this.renderScene();
   }
 
   onChangeShortScale(shortScale: boolean): void {
     this.props.shortScale = shortScale;
-    this.sceneRender();
+    this.renderScene();
   }
 }
