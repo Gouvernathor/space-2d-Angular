@@ -10,6 +10,8 @@
 }
 .exports button {
     display: block;
+}
+.exports button:not(:disabled) {
     cursor: pointer;
 }
 .exports button:not(:first-child) {
