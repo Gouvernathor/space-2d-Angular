@@ -1,4 +1,4 @@
-# Space-2d-TS
+# Space-2d-Angular
 
 This is an Angular and Typescript port of Rye Terrell's [Space-2D](https://github.com/wwwtyro/space-2d), with the additional features of copying and downloading the generated images.
 
