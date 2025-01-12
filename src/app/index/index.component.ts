@@ -1,5 +1,5 @@
 import { Component, computed, ElementRef, viewChild } from '@angular/core';
-import { GuiComponent } from "./gui/gui.component";
+import { GuiComponent, Props } from "./gui/gui.component";
 import { generateRandomSeed } from '../../util/random';
 import { SceneDirective } from './scene.directive';
 
@@ -23,12 +23,12 @@ export class IndexComponent {
   scene = viewChild.required(SceneDirective);
 
   // TODO make those signals
-  props = {
+  props: Props = {
     renderPointStars: true,
     renderStars: true,
     renderSun: false,
     renderNebulae: true,
-    shortScale: true,
+    shortScale: false,
     seed: generateRandomSeed() as string,
   };
 
@@ -79,8 +79,8 @@ export class IndexComponent {
     this.reflow(event.target as Window);
   }
 
-  onChangeSeed(seed: string): void {
-    this.props.seed = seed;
+  onChangeProps(props: Partial<Props>): void {
+    Object.assign(this.props, props);
     this.renderScene();
   }
 
@@ -94,30 +94,5 @@ export class IndexComponent {
     if (height !== this.canvas().height) {
       this.resize(undefined, Math.round(height));
     }
-  }
-
-  onChangeRenderPointStars(renderPointStars: boolean): void {
-    this.props.renderPointStars = renderPointStars;
-    this.renderScene();
-  }
-
-  onChangeRenderStars(renderStars: boolean): void {
-    this.props.renderStars = renderStars;
-    this.renderScene();
-  }
-
-  onChangeRenderSun(renderSun: boolean): void {
-    this.props.renderSun = renderSun;
-    this.renderScene();
-  }
-
-  onChangeRenderNebulae(renderNebulae: boolean): void {
-    this.props.renderNebulae = renderNebulae;
-    this.renderScene();
-  }
-
-  onChangeShortScale(shortScale: boolean): void {
-    this.props.shortScale = shortScale;
-    this.renderScene();
   }
 }

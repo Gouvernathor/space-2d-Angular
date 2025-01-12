@@ -1,6 +1,15 @@
 import { Component, input, output } from '@angular/core';
 import { generateRandomSeed } from '../../../util/random';
 
+export type Props = {
+  seed: string;
+  renderPointStars: boolean;
+  renderStars: boolean;
+  renderSun: boolean;
+  renderNebulae: boolean;
+  shortScale: boolean;
+}
+
 @Component({
   selector: 'app-gui',
   imports: [],
@@ -8,33 +17,24 @@ import { generateRandomSeed } from '../../../util/random';
   styleUrl: './gui.component.scss'
 })
 export class GuiComponent {
-  readonly seed = input.required<string>();
-  readonly maxTextureSize = input.required<unknown>();
+  readonly props = input.required<Readonly<Props>>();
+  readonly maxTextureSize = input.required<number>();
   readonly width = input.required<number>();
   readonly height = input.required<number>();
-  readonly renderPointStars = input.required<boolean>();
-  readonly renderStars = input.required<boolean>();
-  readonly renderSun = input.required<boolean>();
-  readonly renderNebulae = input.required<boolean>();
-  readonly shortScale = input.required<boolean>();
 
-  readonly changeSeed = output<string>();
+  // Emits *updates* to the props
+  readonly changeProps = output<Partial<Props>>();
   readonly changeWidth = output<number>();
   readonly changeHeight = output<number>();
-  readonly changeRenderPointStars = output<boolean>();
-  readonly changeRenderStars = output<boolean>();
-  readonly changeRenderSun = output<boolean>();
-  readonly changeRenderNebulae = output<boolean>();
-  readonly changeShortScale = output<boolean>();
 
   visible = true;
 
   onChangeSeed(event: Event): void {
-    this.changeSeed.emit((event.target as HTMLInputElement).value);
+    this.changeProps.emit({seed: (event.target as HTMLInputElement).value});
   }
 
-  onzeSeedClickRandomi(): void {
-    this.changeSeed.emit(generateRandomSeed());
+  onSeedClickRandomize(): void {
+    this.changeProps.emit({seed: generateRandomSeed()});
   }
 
   onChangeWidth(event: Event): void {
@@ -46,22 +46,22 @@ export class GuiComponent {
   }
 
   onChangeRenderPointStars(event: Event): void {
-    this.changeRenderPointStars.emit((event.target as HTMLInputElement).checked);
+    this.changeProps.emit({renderPointStars: (event.target as HTMLInputElement).checked});
   }
 
   onChangeRenderStars(event: Event): void {
-    this.changeRenderStars.emit((event.target as HTMLInputElement).checked);
+    this.changeProps.emit({renderStars: (event.target as HTMLInputElement).checked});
   }
 
   onChangeRenderSun(event: Event): void {
-    this.changeRenderSun.emit((event.target as HTMLInputElement).checked);
+    this.changeProps.emit({renderSun: (event.target as HTMLInputElement).checked});
   }
 
   onChangeRenderNebulae(event: Event): void {
-    this.changeRenderNebulae.emit((event.target as HTMLInputElement).checked);
+    this.changeProps.emit({renderNebulae: (event.target as HTMLInputElement).checked});
   }
 
   onChangeShortScale(event: Event): void {
-    this.changeShortScale.emit((event.target as HTMLInputElement).checked);
+    this.changeProps.emit({shortScale: (event.target as HTMLInputElement).checked});
   }
 }

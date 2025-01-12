@@ -2,12 +2,12 @@
     @if (visible) {
         <div class="guiItem">
             <label for="seedInput" class="guiLabel">Seed</label>
-            <input id="seedInput" class="guiInput" type="text" [value]="seed()" (change)="onChangeSeed($event)"/>
+            <input id="seedInput" class="guiInput" type="text" [value]="props().seed" (change)="onChangeSeed($event)"/>
         </div>
 
         <div class="guiItem">
             <div class="guiLabel"></div>
-            <button class="guiButton" (click)="onzeSeedClickRandomi()">Randomize Seed</button>
+            <button class="guiButton" (click)="onSeedClickRandomize()">Randomize Seed</button>
         </div>
 
         <div class="guiItem">
@@ -27,23 +27,23 @@
 
         <div class="guiItem">
             <label for="pointStarsInput" class="guiLabel">Point Stars</label>
-            <input id="pointStarsInput" class="guiCheck" type="checkbox" [checked]="renderPointStars()" (change)="onChangeRenderPointStars($event)"/>
+            <input id="pointStarsInput" class="guiCheck" type="checkbox" [checked]="props().renderPointStars" (change)="onChangeRenderPointStars($event)"/>
         </div>
         <div class="guiItem">
             <label for="starsInput" class="guiLabel">Stars</label>
-            <input id="starsInput" class="guiCheck" type="checkbox" [checked]="renderStars()" (change)="onChangeRenderStars($event)"/>
+            <input id="starsInput" class="guiCheck" type="checkbox" [checked]="props().renderStars" (change)="onChangeRenderStars($event)"/>
         </div>
         <div class="guiItem">
             <label for="sunInput" class="guiLabel">Sun</label>
-            <input id="sunInput" class="guiCheck" type="checkbox" [checked]="renderSun()" (change)="onChangeRenderSun($event)"/>
+            <input id="sunInput" class="guiCheck" type="checkbox" [checked]="props().renderSun" (change)="onChangeRenderSun($event)"/>
         </div>
         <div class="guiItem">
             <label for="nebulaeInput" class="guiLabel">Nebulae</label>
-            <input id="nebulaeInput" class="guiCheck" type="checkbox" [checked]="renderNebulae()" (change)="onChangeRenderNebulae($event)"/>
+            <input id="nebulaeInput" class="guiCheck" type="checkbox" [checked]="props().renderNebulae" (change)="onChangeRenderNebulae($event)"/>
         </div>
         <div class="guiItem">
             <label for="shortScaleInput" class="guiLabel">Short Scale</label>
-            <input id="shortScaleInput" class="guiCheck" type="checkbox" [checked]="shortScale()" (change)="onChangeShortScale($event)"/>
+            <input id="shortScaleInput" class="guiCheck" type="checkbox" [checked]="props().shortScale" (change)="onChangeShortScale($event)"/>
         </div>
     }
     <!-- toggle visibility -->
