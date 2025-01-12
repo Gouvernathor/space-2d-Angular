@@ -22,6 +22,7 @@ export class IndexComponent {
   canvas = computed(() => this.canvasRef().nativeElement);
   scene = viewChild.required(SceneDirective);
 
+  // TODO make those signals
   props = {
     renderPointStars: true,
     renderStars: true,
@@ -33,6 +34,10 @@ export class IndexComponent {
 
   ngAfterViewInit(): void {
     this.reflow(window);
+    this.sceneRender();
+  }
+
+  private sceneRender() {
     this.scene().render(this.props);
   }
 
@@ -45,7 +50,7 @@ export class IndexComponent {
       canvas.height = height;
     }
     this.reflow(window);
-    this.scene().render(this.props);
+    this.sceneRender();
   }
 
   private reflow(w: Window): void {
@@ -76,7 +81,7 @@ export class IndexComponent {
 
   onFinishChangeSeed(seed: string): void {
     this.props.seed = seed;
-    this.scene().render(this.props);
+    this.sceneRender();
   }
 
   onFinishChangeWidth(width: number): void {
@@ -93,26 +98,26 @@ export class IndexComponent {
 
   onChangeRenderPointStars(renderPointStars: boolean): void {
     this.props.renderPointStars = renderPointStars;
-    this.scene().render(this.props);
+    this.sceneRender();
   }
 
   onChangeRenderStars(renderStars: boolean): void {
     this.props.renderStars = renderStars;
-    this.scene().render(this.props);
+    this.sceneRender();
   }
 
   onChangeRenderSun(renderSun: boolean): void {
     this.props.renderSun = renderSun;
-    this.scene().render(this.props);
+    this.sceneRender();
   }
 
   onChangeRenderNebulae(renderNebulae: boolean): void {
     this.props.renderNebulae = renderNebulae;
-    this.scene().render(this.props);
+    this.sceneRender();
   }
 
   onChangeShortScale(shortScale: boolean): void {
     this.props.shortScale = shortScale;
-    this.scene().render(this.props);
+    this.sceneRender();
   }
 }
