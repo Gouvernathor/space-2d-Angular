@@ -2,48 +2,48 @@
     @if (visible) {
         <div class="guiItem">
             <label for="seedInput" class="guiLabel">Seed</label>
-            <input id="seedInput" class="guiInput" type="text" [value]="seed()" (change)="onSeedChange($event)"/>
+            <input id="seedInput" class="guiInput" type="text" [value]="seed()" (change)="onChangeSeed($event)"/>
         </div>
 
         <div class="guiItem">
             <div class="guiLabel"></div>
-            <button class="guiButton" (click)="onClickRandomizeSeed()">Randomize Seed</button>
+            <button class="guiButton" (click)="onzeSeedClickRandomi()">Randomize Seed</button>
         </div>
 
         <div class="guiItem">
             <label for="widthInput" class="guiLabel">Width</label>
             <div class="guiMulti">
-                <input class="guiMultiRange" type="range" min="1" [max]="maxTextureSize()" step="1" [value]="width()" (change)="onWidthChange($event)"/>
-                <input id="widthInput" class="guiMultiNumber" type="number" min="1" [max]="maxTextureSize()" step="1" [value]="width()" (change)="onWidthChange($event)"/>
+                <input class="guiMultiRange" type="range" min="1" [max]="maxTextureSize()" step="1" [value]="width()" (change)="onChangeWidth($event)"/>
+                <input id="widthInput" class="guiMultiNumber" type="number" min="1" [max]="maxTextureSize()" step="1" [value]="width()" (change)="onChangeWidth($event)"/>
             </div>
         </div>
         <div class="guiItem">
             <label for="heightInput" class="guiLabel">Height</label>
             <div class="guiMulti">
-                <input class="guiMultiRange" type="range" min="1" [max]="maxTextureSize()" step="1" [value]="height()" (change)="onHeightChange($event)"/>
-                <input id="heightInput" class="guiMultiNumber" type="number" min="1" [max]="maxTextureSize()" step="1" [value]="height()" (change)="onHeightChange($event)"/>
+                <input class="guiMultiRange" type="range" min="1" [max]="maxTextureSize()" step="1" [value]="height()" (change)="onChangeHeight($event)"/>
+                <input id="heightInput" class="guiMultiNumber" type="number" min="1" [max]="maxTextureSize()" step="1" [value]="height()" (change)="onChangeHeight($event)"/>
             </div>
         </div>
 
         <div class="guiItem">
             <label for="pointStarsInput" class="guiLabel">Point Stars</label>
-            <input id="pointStarsInput" class="guiCheck" type="checkbox" [checked]="renderPointStars()" (change)="onRenderPointStarsChange($event)"/>
+            <input id="pointStarsInput" class="guiCheck" type="checkbox" [checked]="renderPointStars()" (change)="onChangeRenderPointStars($event)"/>
         </div>
         <div class="guiItem">
             <label for="starsInput" class="guiLabel">Stars</label>
-            <input id="starsInput" class="guiCheck" type="checkbox" [checked]="renderStars()" (change)="onRenderStarsChange($event)"/>
+            <input id="starsInput" class="guiCheck" type="checkbox" [checked]="renderStars()" (change)="onChangeRenderStars($event)"/>
         </div>
         <div class="guiItem">
             <label for="sunInput" class="guiLabel">Sun</label>
-            <input id="sunInput" class="guiCheck" type="checkbox" [checked]="renderSun()" (change)="onRenderSunChange($event)"/>
+            <input id="sunInput" class="guiCheck" type="checkbox" [checked]="renderSun()" (change)="onChangeRenderSun($event)"/>
         </div>
         <div class="guiItem">
             <label for="nebulaeInput" class="guiLabel">Nebulae</label>
-            <input id="nebulaeInput" class="guiCheck" type="checkbox" [checked]="renderNebulae()" (change)="onRenderNebulaeChange($event)"/>
+            <input id="nebulaeInput" class="guiCheck" type="checkbox" [checked]="renderNebulae()" (change)="onChangeRenderNebulae($event)"/>
         </div>
         <div class="guiItem">
             <label for="shortScaleInput" class="guiLabel">Short Scale</label>
-            <input id="shortScaleInput" class="guiCheck" type="checkbox" [checked]="shortScale()" (change)="onShortScaleChange($event)"/>
+            <input id="shortScaleInput" class="guiCheck" type="checkbox" [checked]="shortScale()" (change)="onChangeShortScale($event)"/>
         </div>
     }
     <!-- toggle visibility -->

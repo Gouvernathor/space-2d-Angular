@@ -18,9 +18,9 @@ export class GuiComponent {
   readonly renderNebulae = input.required<boolean>();
   readonly shortScale = input.required<boolean>();
 
-  readonly finishChangeSeed = output<string>();
-  readonly finishChangeWidth = output<number>();
-  readonly finishChangeHeight = output<number>();
+  readonly changeSeed = output<string>();
+  readonly changeWidth = output<number>();
+  readonly changeHeight = output<number>();
   readonly changeRenderPointStars = output<boolean>();
   readonly changeRenderStars = output<boolean>();
   readonly changeRenderSun = output<boolean>();
@@ -29,39 +29,39 @@ export class GuiComponent {
 
   visible = true;
 
-  onSeedChange(event: Event): void {
-    this.finishChangeSeed.emit((event.target as HTMLInputElement).value);
+  onChangeSeed(event: Event): void {
+    this.changeSeed.emit((event.target as HTMLInputElement).value);
   }
 
-  onClickRandomizeSeed(): void {
-    this.finishChangeSeed.emit(generateRandomSeed());
+  onzeSeedClickRandomi(): void {
+    this.changeSeed.emit(generateRandomSeed());
   }
 
-  onWidthChange(event: Event): void {
-    this.finishChangeWidth.emit(parseInt((event.target as HTMLInputElement).value));
+  onChangeWidth(event: Event): void {
+    this.changeWidth.emit(parseInt((event.target as HTMLInputElement).value));
   }
 
-  onHeightChange(event: Event): void {
-    this.finishChangeHeight.emit(parseInt((event.target as HTMLInputElement).value));
+  onChangeHeight(event: Event): void {
+    this.changeHeight.emit(parseInt((event.target as HTMLInputElement).value));
   }
 
-  onRenderPointStarsChange(event: Event): void {
+  onChangeRenderPointStars(event: Event): void {
     this.changeRenderPointStars.emit((event.target as HTMLInputElement).checked);
   }
 
-  onRenderStarsChange(event: Event): void {
+  onChangeRenderStars(event: Event): void {
     this.changeRenderStars.emit((event.target as HTMLInputElement).checked);
   }
 
-  onRenderSunChange(event: Event): void {
+  onChangeRenderSun(event: Event): void {
     this.changeRenderSun.emit((event.target as HTMLInputElement).checked);
   }
 
-  onRenderNebulaeChange(event: Event): void {
+  onChangeRenderNebulae(event: Event): void {
     this.changeRenderNebulae.emit((event.target as HTMLInputElement).checked);
   }
 
-  onShortScaleChange(event: Event): void {
+  onChangeShortScale(event: Event): void {
     this.changeShortScale.emit((event.target as HTMLInputElement).checked);
   }
 }

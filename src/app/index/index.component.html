@@ -6,9 +6,9 @@
     [width]="canvas.width" [height]="canvas.height"
     [renderPointStars]="props.renderPointStars" [renderStars]="props.renderStars" [renderSun]="props.renderSun" [renderNebulae]="props.renderNebulae" [shortScale]="props.shortScale"
 
-    (finishChangeSeed)="onFinishChangeSeed($event)"
-    (finishChangeWidth)="onFinishChangeWidth($event)"
-    (finishChangeHeight)="onFinishChangeHeight($event)"
+    (changeSeed)="onChangeSeed($event)"
+    (changeWidth)="onChangeWidth($event)"
+    (changeHeight)="onChangeHeight($event)"
     (changeRenderPointStars)="onChangeRenderPointStars($event)"
     (changeRenderStars)="onChangeRenderStars($event)"
     (changeRenderSun)="onChangeRenderSun($event)"

@@ -79,18 +79,18 @@ export class IndexComponent {
     this.reflow(event.target as Window);
   }
 
-  onFinishChangeSeed(seed: string): void {
+  onChangeSeed(seed: string): void {
     this.props.seed = seed;
     this.sceneRender();
   }
 
-  onFinishChangeWidth(width: number): void {
+  onChangeWidth(width: number): void {
     if (width !== this.canvas().width) {
       this.resize(Math.round(width), undefined);
     }
   }
 
-  onFinishChangeHeight(height: number): void {
+  onChangeHeight(height: number): void {
     if (height !== this.canvas().height) {
       this.resize(undefined, Math.round(height));
     }
