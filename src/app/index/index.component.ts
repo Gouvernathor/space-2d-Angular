@@ -31,6 +31,11 @@ export class IndexComponent {
     seed: generateRandomSeed() as string,
   };
 
+  ngOnInit(): void {
+    this.canvas().width = window.innerWidth-(this.guiWidth+3*this.marginWidth);
+    this.canvas().height = window.innerHeight-(2*this.marginHeight);
+  }
+
   ngAfterViewInit(): void {
     this.reflow(window);
     this.renderScene();
