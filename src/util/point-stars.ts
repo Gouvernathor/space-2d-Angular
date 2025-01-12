@@ -1,7 +1,8 @@
-import RNG from '@gouvernathor/rng';
-
-// TODO: make a version supporting/generating alpha
-export function generateTexture(width: number, height: number, density: number, brightness: number, prng: RNG) {
+export function generateTexture(
+    width: number, height: number,
+    density: number, brightness: number,
+    prng: {random: () => number, randRange: (min: number, max: number) => number},
+): Uint8Array {
     // Determine the number of stars to be rendered
     const count = Math.round(width * height * density);
     // Create a byte array

@@ -61,10 +61,10 @@ export class SceneDirective {
       regl.clear({color: [0,0,0,1]});
     });
 
-    const rand = new RNG(props.seed);
-    const seed1 = rand.randInt();
-    const seed2 = rand.randInt();
-    const seed3 = rand.randInt();
+    const rand = new RNG.MT(props.seed);
+    const seed1 = rand.randRange(0xffffffff);
+    const seed2 = rand.randRange(0xffffffff);
+    const seed3 = rand.randRange(0xffffffff);
     // generating 3 seeds to use for the 3 different layers of the scene
 
     if (props.renderPointStars) {
