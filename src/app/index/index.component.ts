@@ -22,7 +22,6 @@ export class IndexComponent {
   canvas = computed(() => this.canvasRef().nativeElement);
   scene = viewChild.required(SceneDirective);
 
-  // TODO make those signals
   props: Props = {
     renderPointStars: true,
     renderStars: true,
