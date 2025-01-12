@@ -61,7 +61,12 @@ export class SceneDirective {
       regl.clear({color: [0,0,0,1]});
     });
 
-    let rand = new RNG(props.seed+(0).toString(36));
+    const rand = new RNG(props.seed);
+    const seed1 = rand.randInt();
+    const seed2 = rand.randInt();
+    const seed3 = rand.randInt();
+    // generating 3 seeds to use for the 3 different layers of the scene
+
     if (props.renderPointStars) {
       let data = pointStars.generateTexture(width, height, 0.05, 0.125, rand);
       this.pointStarTexture({
@@ -79,9 +84,9 @@ export class SceneDirective {
       });
     }
 
-    rand = new RNG(props.seed+(1).toString(36));
+    rand.seed = seed1;
     let nebulaCount = 0;
-    if (props.renderNebulae) nebulaCount = Math.round(rand.random() * 4 + 1);
+    if (props.renderNebulae) nebulaCount = rand.randRange(1, 5);
     let nebulaOut = this.pingPong(ping, ping, pong, nebulaCount, (source, destination) => {
       this.nebulaRenderer({
         source,
@@ -97,9 +102,9 @@ export class SceneDirective {
       });
     });
 
-    rand = new RNG(props.seed+(2).toString(36));
+    rand.seed = seed2;
     let starCount = 0;
-    if (props.renderStars) starCount = Math.round(rand.random() * 8 + 1);
+    if (props.renderStars) starCount = rand.randRange(1, 9);
     let starOut = this.pingPong(nebulaOut, ping, pong, starCount, (source, destination) => {
       this.starRenderer({
         center: [rand.random(), rand.random()],
@@ -115,7 +120,7 @@ export class SceneDirective {
       });
     });
 
-    rand = new RNG(props.seed+(3).toString(36));
+    rand.seed = seed3;
     let sunOut;
     if (props.renderSun) {
       sunOut = starOut === pong ? ping : pong;
