@@ -1,6 +1,5 @@
 import { Component, computed, ElementRef, viewChild } from '@angular/core';
 import { GuiComponent } from "./gui/gui.component";
-import { reflow } from '../../util/index';
 import { generateRandomSeed } from '../../util/random';
 import { SceneDirective } from './scene.directive';
 
@@ -50,10 +49,25 @@ export class IndexComponent {
   }
 
   private reflow(w: Window): void {
-    reflow(this.canvas(), {
-      wInnerHeight: w.innerHeight, wInnerWidth: w.innerWidth,
-      guiWidth: this.guiWidth, marginWidth: this.marginWidth, marginHeight: this.marginHeight,
-    });
+    const canvas = this.canvas();
+    const width = canvas.width;
+    const height = canvas.height;
+    const wAvailable = w.innerWidth - (this.guiWidth + 3*this.marginWidth);
+    const hAvailable = w.innerHeight - 2*this.marginHeight;
+
+    if (width/height > wAvailable/hAvailable) {
+      canvas.style.left = `${this.guiWidth+2*this.marginWidth}px`;
+      canvas.style.width = `${wAvailable}px`;
+      const hComputed = wAvailable * height / width;
+      canvas.style.height = `${hComputed}px`;
+    } else {
+      canvas.style.height = `${hAvailable}px`;
+      const wComputed = hAvailable * width / height;
+      const wCenter = this.guiWidth + 2*this.marginWidth + wAvailable/2;
+      canvas.style.left = `${wCenter - wComputed/2}px`;
+      canvas.style.width = `${wComputed}px`;
+    }
+    canvas.style.top = `${this.marginHeight}px`;
   }
 
   onResize(event: Event): void {
