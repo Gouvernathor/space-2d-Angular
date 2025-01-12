@@ -17,8 +17,8 @@ export class SceneDirective {
   private starRenderer: REGL.DrawCommand;
   private nebulaRenderer: REGL.DrawCommand;
   private copyRenderer: REGL.DrawCommand;
-  private lastWidth: number|null;
-  private lastHeight: number|null;
+  private lastWidth?: number;
+  private lastHeight?: number;
   public readonly maxTextureSize: number;
 
   private canvas = computed(() => this.canvasRef.nativeElement);
@@ -37,8 +37,6 @@ export class SceneDirective {
     this.starRenderer = star.createRenderer(regl);
     this.nebulaRenderer = nebula.createRenderer(regl);
     this.copyRenderer = copy.createRenderer(regl);
-    this.lastWidth = null;
-    this.lastHeight = null;
     this.maxTextureSize = regl.limits.maxTextureSize;
   }
 
