@@ -95,7 +95,7 @@ export class IndexComponent {
     }
   }
 
-  async canvasToBlob(canvas: HTMLCanvasElement, type?: string, quality = 1.) {
+  private async canvasToBlob(canvas: HTMLCanvasElement, type?: string, quality = 1.) {
     const blob = await new Promise<Blob|null>(resolve => canvas.toBlob(resolve, type, quality));
     if (blob === null) {
       throw new Error(`Failed to extract data as ${type} from canvas`);
@@ -103,31 +103,23 @@ export class IndexComponent {
     return blob;
   }
 
-  async downloadCanvas() {
-    let blobURL: string;
+  private blobURL?: string;
 
-    function downloadFromURL() {
+  async downloadCanvas() {
+    function downloadFromURL(url: string) {
       const a = document.createElement('a');
-      a.href = blobURL;
+      a.href = url;
       a.download = 'stars.png';
       a.click();
     }
 
-    this.canvas().toBlob((blob) => {
-        if (blob === null) {
-          console.error("Failed to extract data from canvas");
-          return;
-        }
+    const blob = await this.canvasToBlob(this.canvas(), 'image/webp', 1.0);
 
-        if (blobURL !== undefined) {
-          URL.revokeObjectURL(blobURL);
-        }
-        blobURL = URL.createObjectURL(blob);
-        downloadFromURL();
-      },
-      'image/webp',
-      1.0,
-    );
+    if (this.blobURL !== undefined) {
+      URL.revokeObjectURL(this.blobURL);
+    }
+
+    downloadFromURL(this.blobURL = URL.createObjectURL(blob));
   }
 
   canCopyCanvas = navigator?.clipboard?.write !== undefined;
