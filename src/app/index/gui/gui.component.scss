@@ -1,3 +1,8 @@
+// TODO
+// factorize rules
+// use CSS variables for colors
+// drop most classes and use selectors based on 1) the outermost container with a class and 2) the kind of element and type of input
+
 .dg-gui {
     position: fixed;
     top: 16px;
@@ -5,7 +10,7 @@
     --highlight: #0d8;
 }
 
-.seedDiv {
+.guiItem {
     border-bottom: 1px solid rgb(51, 51, 51);
     background-color: rgb(26, 26, 26);
     min-height: 25px;
@@ -16,7 +21,7 @@
     align-items: center;
 }
 
-.seedLabel {
+.guiLabel {
     width: 96px;
     font: 11px Arial;
     padding: 3px;
@@ -25,12 +30,90 @@
     user-select: none;
 }
 
-.seedInput {
+.guiInput {
+    width: 192px;
+    box-sizing: border-box;
     color: var(--highlight);
     font: 11px Arial;
     background-color: rgb(68, 68, 68);
     padding: 3px;
-    width: 192px;
     border: medium;
     outline: none;
+}
+
+.guiButton {
+    all: unset;
+    width: 192px;
+    box-sizing: border-box;
+    background-color: rgb(68, 68, 68);
+    color: var(--highlight);
+    font: 11px Arial;
+    padding: 3px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.guiMulti {
+    width: 192px;
+    display: flex;
+    flex-flow: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.guiMultiRange {
+    all: unset;
+    width: 65%; height: 19px; position: relative;
+}
+// track
+.guiMultiRange::-webkit-slider-runnable-track {
+    all: unset;
+    position: absolute; width: 100%; height: 1px; left: 0px; background-color: rgb(68, 68, 68); top: 9px;
+}
+.guiMultiRange::-moz-range-track {
+    all: unset;
+    position: absolute; width: 100%; height: 1px; left: 0px; background-color: rgb(68, 68, 68); top: 9px;
+}
+.guiMultiRange::-ms-track {
+    all: unset;
+    position: absolute; width: 100%; height: 1px; left: 0px; background-color: rgb(68, 68, 68); top: 9px;
+}
+// thumb
+.guiMultiRange::-webkit-slider-thumb {
+    all: unset;
+    position: absolute; background-color: rgb(68, 68, 68); border: 1px solid rgb(0, 221, 136); box-sizing: border-box; border-radius: 0px; cursor: pointer; top: 3.65px; left: 6.13651px; width: 11.7px; height: 11.7px;
+}
+.guiMultiRange::-moz-range-thumb {
+    all: unset;
+    position: absolute; background-color: rgb(68, 68, 68); border: 1px solid rgb(0, 221, 136); box-sizing: border-box; border-radius: 0px; cursor: pointer; top: 3.65px; left: 6.13651px; width: 11.7px; height: 11.7px;
+}
+.guiMultiRange::-ms-thumb {
+    all: unset;
+    position: absolute; background-color: rgb(68, 68, 68); border: 1px solid rgb(0, 221, 136); box-sizing: border-box; border-radius: 0px; cursor: pointer; top: 3.65px; left: 6.13651px; width: 11.7px; height: 11.7px;
+}
+
+.guiMultiNumber {
+    all: unset;
+    width: 30%;
+    box-sizing: border-box;
+    color: var(--highlight);
+    font: 11px Arial;
+    padding: 3px;
+    background-color: rgb(68, 68, 68);
+    border: medium;
+    outline: none;
+}
+
+.guiCheck {
+    margin: 0;
+}
+
+.guiToggler {
+    all: unset;
+    font: 11px Arial;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    width: 294px;
+    cursor: pointer;
 }

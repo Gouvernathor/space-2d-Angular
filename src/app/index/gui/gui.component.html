@@ -1,8 +1,53 @@
 <div class="dg-gui">
-    @if (true) {
-        <div class="seedDiv"> <!-- seed input -->
-            <label class="seedLabel">Seed</label>
-            <input class="seedInput" type="text" [value]="seed()" (change)="onSeedChange($event)"/>
+    @if (visible) {
+        <div class="guiItem">
+            <label for="seedInput" class="guiLabel">Seed</label>
+            <input id="seedInput" class="guiInput" type="text" [value]="seed()" (change)="onSeedChange($event)"/>
+        </div>
+
+        <div class="guiItem">
+            <div class="guiLabel"></div>
+            <button class="guiButton" (click)="onClickRandomizeSeed()">Randomize Seed</button>
+        </div>
+
+        <div class="guiItem">
+            <label for="widthInput" class="guiLabel">Width</label>
+            <div class="guiMulti">
+                <input class="guiMultiRange" type="range" min="1" [max]="maxTextureSize()" step="1" [value]="width()" (change)="onWidthChange($event)"/>
+                <input id="widthInput" class="guiMultiNumber" type="number" min="1" [max]="maxTextureSize()" step="1" [value]="width()" (change)="onWidthChange($event)"/>
+            </div>
+        </div>
+        <div class="guiItem">
+            <label for="heightInput" class="guiLabel">Height</label>
+            <div class="guiMulti">
+                <input class="guiMultiRange" type="range" min="1" [max]="maxTextureSize()" step="1" [value]="height()" (change)="onHeightChange($event)"/>
+                <input id="heightInput" class="guiMultiNumber" type="number" min="1" [max]="maxTextureSize()" step="1" [value]="height()" (change)="onHeightChange($event)"/>
+            </div>
+        </div>
+
+        <div class="guiItem">
+            <label for="pointStarsInput" class="guiLabel">Point Stars</label>
+            <input id="pointStarsInput" class="guiCheck" type="checkbox" [checked]="renderPointStars()" (change)="onRenderPointStarsChange($event)"/>
+        </div>
+        <div class="guiItem">
+            <label for="starsInput" class="guiLabel">Stars</label>
+            <input id="starsInput" class="guiCheck" type="checkbox" [checked]="renderStars()" (change)="onRenderStarsChange($event)"/>
+        </div>
+        <div class="guiItem">
+            <label for="sunInput" class="guiLabel">Sun</label>
+            <input id="sunInput" class="guiCheck" type="checkbox" [checked]="renderSun()" (change)="onRenderSunChange($event)"/>
+        </div>
+        <div class="guiItem">
+            <label for="nebulaeInput" class="guiLabel">Nebulae</label>
+            <input id="nebulaeInput" class="guiCheck" type="checkbox" [checked]="renderNebulae()" (change)="onRenderNebulaeChange($event)"/>
+        </div>
+        <div class="guiItem">
+            <label for="shortScaleInput" class="guiLabel">Short Scale</label>
+            <input id="shortScaleInput" class="guiCheck" type="checkbox" [checked]="shortScale()" (change)="onShortScaleChange($event)"/>
         </div>
     }
+    <!-- toggle visibility -->
+    <div class="guiItem">
+        <button class="guiToggler" (click)="visible = !visible">{{visible ? 'Close' : 'Open'}} Controls</button>
+    </div>
 </div>
