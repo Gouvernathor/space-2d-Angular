@@ -48,17 +48,20 @@ export class IndexComponent {
   private renderScene() {
     this.scene().render(this.props);
 
-    this.blobMap.clear();
-    for (const mime of blobMimes) {
-      this.canvas().toBlob(blob => {
-        if (blob === null) {
-          console.warn(`Failed to extract data as ${mime} from canvas`);
-        } else {
-          // console.log(`${mime} canvas size: ${blob.size}`);
-          this.blobMap.set(mime, blob);
-        }
-      }, mime, 1.);
-    }
+    const blobMap = this.blobMap = new Map(); // previous blob generations fill a dereferenced map object
+    Promise.all(blobMimes.map(mime => {
+      return new Promise<void>(resolve => {
+        this.canvas().toBlob(blob => {
+          if (blob === null) {
+            console.warn(`Failed to extract data as ${mime} from canvas`);
+          } else {
+            // console.log(`${mime} canvas size: ${blob.size}`);
+            blobMap.set(mime, blob);
+          }
+          resolve();
+        }, mime, 1.);
+      });
+    }));
   }
 
   private resize(width?: number, height?: number): void {

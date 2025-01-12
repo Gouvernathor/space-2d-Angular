@@ -11,8 +11,8 @@
     />
 
 <div class="exports">
-    <button (click)="downloadCanvas()">Download the image</button>
-    <button (click)="copyCanvas()" [disabled]="!canCopyCanvas">Copy the image to clipboard</button>
+    <button (click)="downloadCanvas()" [disabled]="blobMap.size<1">Download the image</button>
+    <button (click)="copyCanvas()" [disabled]="!canCopyCanvas || blobMap.size<1">Copy the image to clipboard</button>
 </div>
 
 <!--
