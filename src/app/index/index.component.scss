@@ -1,3 +1,17 @@
 #render-canvas, .render-canvas {
     position: fixed;
 }
+
+.exports {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    margin: 16px;
+}
+.exports button {
+    display: block;
+    cursor: pointer;
+}
+.exports button:not(:first-child) {
+    margin-top: 8px;
+}

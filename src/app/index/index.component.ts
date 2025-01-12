@@ -94,4 +94,11 @@ export class IndexComponent {
       this.resize(undefined, Math.round(height));
     }
   }
+
+  downloadCanvas(): void {
+  }
+
+  copyCanvas(): void {
+    // TODO
+  }
 }
