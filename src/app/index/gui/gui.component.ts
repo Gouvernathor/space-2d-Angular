@@ -1,6 +1,6 @@
 import { Component, input, output } from '@angular/core';
+import { Props } from '@gouvernathor/space-2d';
 import { generateRandomSeed } from '../../../util/random';
-import { Props } from '../../../util/scene';
 
 @Component({
   selector: 'app-gui',

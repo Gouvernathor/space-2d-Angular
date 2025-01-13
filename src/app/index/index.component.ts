@@ -1,8 +1,8 @@
 import { Component, computed, ElementRef, viewChild } from '@angular/core';
+import { Props } from '@gouvernathor/space-2d';
 import { GuiComponent } from "./gui/gui.component";
 import { generateRandomSeed } from '../../util/random';
 import { SceneDirective } from './scene.directive';
-import { Props } from '../../util/scene';
 
 const blobMimes = ['image/webp', 'image/png'];
 
