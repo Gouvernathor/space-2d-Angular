@@ -1,14 +1,6 @@
 import { Component, input, output } from '@angular/core';
 import { generateRandomSeed } from '../../../util/random';
-
-export type Props = {
-  seed: string;
-  renderPointStars: boolean;
-  renderStars: boolean;
-  renderSun: boolean;
-  renderNebulae: boolean;
-  shortScale: boolean;
-}
+import { Props } from '../../../util/scene';
 
 @Component({
   selector: 'app-gui',
