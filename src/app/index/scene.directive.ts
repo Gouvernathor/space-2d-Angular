@@ -1,5 +1,5 @@
 import { computed, Directive, ElementRef } from '@angular/core';
-import { Props, Scene } from '../../util/scene';
+import { Props, Scene } from '@gouvernathor/space-2d';
 
 @Directive({
   selector: '[appScene]'
