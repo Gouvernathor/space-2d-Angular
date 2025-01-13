@@ -5,6 +5,7 @@ import * as pointStars from '../../util/point-stars';
 import * as star from '../../util/star';
 import * as nebula from '../../util/nebula';
 import * as copy from '../../util/copy';
+import { Props } from './gui/gui.component';
 
 @Directive({
   selector: '[appScene]'
@@ -36,7 +37,7 @@ export class SceneDirective {
     this.copyRenderer = copy.createRenderer(regl);
   }
 
-  render(props: any): void {
+  render(props: Props): void {
     const ping = this.ping;
     const pong = this.pong;
     const regl = this.regl;
