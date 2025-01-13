@@ -1,4 +1,4 @@
-import { computed, Directive, ElementRef } from '@angular/core';
+import { Directive, ElementRef } from '@angular/core';
 import { Props, Scene } from '@gouvernathor/space-2d';
 
 @Directive({
@@ -6,13 +6,15 @@ import { Props, Scene } from '@gouvernathor/space-2d';
 })
 export class SceneDirective {
   private scene: Scene;
-  public readonly maxTextureSize = computed(() => this.scene.maxTextureSize);
-  private canvas = computed(() => this.canvasRef.nativeElement);
 
   constructor(
     private canvasRef: ElementRef<HTMLCanvasElement>,
   ) {
-    this.scene = new Scene(this.canvas);
+    this.scene = new Scene(() => this.canvasRef.nativeElement);
+  }
+
+  public get maxTextureSize() {
+    return this.scene.maxTextureSize;
   }
 
   render(props: Props): void {
