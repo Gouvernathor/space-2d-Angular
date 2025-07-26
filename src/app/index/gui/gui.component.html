@@ -42,8 +42,11 @@
             <input id="nebulaeInput" class="guiCheck" type="checkbox" [checked]="props().renderNebulae" (change)="onChangeRenderNebulae($event)"/>
         </div>
         <div class="guiItem">
-            <label for="shortScaleInput" class="guiLabel">Short Scale</label>
-            <input id="shortScaleInput" class="guiCheck" type="checkbox" [checked]="props().shortScale" (change)="onChangeShortScale($event)"/>
+            <label for="scaleInput" class="guiLabel">Scale</label>
+            <div class="guiMulti">
+                <input class="guiMultiRange" type="range" min="1" [max]="maxTextureSize()" step="1" [value]="props().scale" (change)="onChangeScale($event)"/>
+                <input id="scaleInput" class="guiMultiNumber" type="number" min="1" [max]="maxTextureSize()" step="1" [value]="props().scale" (change)="onChangeScale($event)"/>
+            </div>
         </div>
     }
     <!-- toggle visibility -->

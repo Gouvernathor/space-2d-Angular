@@ -53,7 +53,7 @@ export class GuiComponent {
     this.changeProps.emit({renderNebulae: (event.target as HTMLInputElement).checked});
   }
 
-  onChangeShortScale(event: Event): void {
-    this.changeProps.emit({shortScale: (event.target as HTMLInputElement).checked});
+  onChangeScale(event: Event): void {
+    this.changeProps.emit({scale: parseInt((event.target as HTMLInputElement).value)});
   }
 }

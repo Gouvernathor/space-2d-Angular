@@ -30,15 +30,16 @@ export class IndexComponent {
     renderStars: true,
     renderSun: false,
     renderNebulae: true,
-    shortScale: false,
+    scale: null!, // set in ngOnInit
     seed: generateRandomSeed() as string,
   };
 
   blobMap: Map<string, Blob> = new Map();
 
   ngOnInit(): void {
-    this.canvas().width = window.innerWidth-(this.guiWidth+3*this.marginWidth);
-    this.canvas().height = window.innerHeight-(2*this.marginHeight);
+    const width = this.canvas().width = window.innerWidth-(this.guiWidth+3*this.marginWidth);
+    const height = this.canvas().height = window.innerHeight-(2*this.marginHeight);
+    this.props.scale = Math.max(width, height);
   }
 
   ngAfterViewInit(): void {
