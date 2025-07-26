@@ -123,11 +123,13 @@ export class IndexComponent {
   private blobURL?: string;
 
   async downloadCanvas() {
-    if (this.blobMap.size === 0) {
+    const mime = blobMimes.find(mime => this.blobMap.has(mime));
+    if (mime === undefined) {
       console.warn('No blobs available to download');
       return;
     }
-    const blob = this.blobMap[Symbol.iterator]().next().value![1];
+    const blob = this.blobMap.get(mime)!;
+    const extension = mime.split('/').at(-1);
 
     if (this.blobURL !== undefined) {
       URL.revokeObjectURL(this.blobURL);
@@ -136,7 +138,7 @@ export class IndexComponent {
 
     const a = document.createElement('a');
     a.href = this.blobURL;
-    a.download = 'stars.png';
+    a.download = `stars.${extension}`; // though Firefox will fix the extension anyway
     a.click();
   }
 
